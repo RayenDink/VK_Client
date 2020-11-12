@@ -17,6 +17,7 @@
 		A324243A255DD2AC00AC2018 /* MyFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3242439255DD2AC00AC2018 /* MyFriendsController.swift */; };
 		A324243D255DD2D600AC2018 /* MyGroupsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324243C255DD2D600AC2018 /* MyGroupsCell.swift */; };
 		A3242440255DD2EE00AC2018 /* MyGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324243F255DD2EE00AC2018 /* MyGroupsController.swift */; };
+		A3442EC2255DF3B70043FC13 /* LoginViewController+KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3442EC1255DF3B70043FC13 /* LoginViewController+KeyboardSettings.swift */; };
 		A3CC6CC2255DA00200293293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC1255DA00200293293 /* AppDelegate.swift */; };
 		A3CC6CC4255DA00200293293 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC3255DA00200293293 /* SceneDelegate.swift */; };
 		A3CC6CC6255DA00200293293 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC5255DA00200293293 /* LoginViewController.swift */; };
@@ -38,6 +39,7 @@
 		A3242439255DD2AC00AC2018 /* MyFriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsController.swift; sourceTree = "<group>"; };
 		A324243C255DD2D600AC2018 /* MyGroupsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsCell.swift; sourceTree = "<group>"; };
 		A324243F255DD2EE00AC2018 /* MyGroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsController.swift; sourceTree = "<group>"; };
+		A3442EC1255DF3B70043FC13 /* LoginViewController+KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+KeyboardSettings.swift"; sourceTree = "<group>"; };
 		A3CC6CBE255DA00200293293 /* VK_Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_Client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CC6CC1255DA00200293293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3CC6CC3255DA00200293293 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				A324243F255DD2EE00AC2018 /* MyGroupsController.swift */,
 				A3CC6CC7255DA00200293293 /* Main.storyboard */,
 				A3CC6CCD255DA00200293293 /* Assets.xcassets */,
+				A3442EC1255DF3B70043FC13 /* LoginViewController+KeyboardSettings.swift */,
 				A3242423255DD05900AC2018 /* AvailableGroupsCell.swift */,
 				A3242427255DD07700AC2018 /* AvailableGroupsController.swift */,
 				A324242A255DD0A300AC2018 /* DetailFriendCell.swift */,
@@ -176,6 +179,7 @@
 				A324243A255DD2AC00AC2018 /* MyFriendsController.swift in Sources */,
 				A324243D255DD2D600AC2018 /* MyGroupsCell.swift in Sources */,
 				A3CC6CC6255DA00200293293 /* LoginViewController.swift in Sources */,
+				A3442EC2255DF3B70043FC13 /* LoginViewController+KeyboardSettings.swift in Sources */,
 				A3242428255DD07700AC2018 /* AvailableGroupsController.swift in Sources */,
 				A3242440255DD2EE00AC2018 /* MyGroupsController.swift in Sources */,
 				A3CC6CCC255DA00200293293 /* VK_Client.xcdatamodeld in Sources */,

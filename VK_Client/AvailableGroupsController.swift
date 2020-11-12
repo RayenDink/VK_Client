@@ -10,12 +10,12 @@ import UIKit
   class AvailableGroupsController: UITableViewController {
 
   // Дефолтный массив:
-     var allGroups = [Group(nameGroup: "New Rap News", imageGroup: #imageLiteral(resourceName: "55")),
-                      Group(nameGroup: "Лентач", imageGroup: #imageLiteral(resourceName: "11")),
-                      Group(nameGroup: "Mac OS", imageGroup: #imageLiteral(resourceName: "33")),
-                      Group(nameGroup: "New Rap", imageGroup: #imageLiteral(resourceName: "44")),
-                      Group(nameGroup: "Рифмы и Панчи", imageGroup: #imageLiteral(resourceName: "66")),
-                      Group(nameGroup: "Hardcore Fighting", imageGroup: #imageLiteral(resourceName: "22"))]
+    var allGroups = [Group(nameGroup: "New Rap News", imageGroup: "New Rap News"),
+                         Group(nameGroup: "Лентач", imageGroup: "Лентач"),
+                         Group(nameGroup: "Mac OS", imageGroup: "Mac OS"),
+                         Group(nameGroup: "New Rap", imageGroup: "New Rap"),
+                         Group(nameGroup: "Рифмы и Панчи", imageGroup: "Рифмы и Панчи"),
+                         Group(nameGroup: "Hardcore Fighting", imageGroup: "Hardcore Fighting")]
 
       override func viewDidLoad() {
          super.viewDidLoad()
@@ -36,8 +36,7 @@ import UIKit
           let cell = tableView.dequeueReusableCell(withIdentifier: "AvailableGroupsCell", for: indexPath) as! AvailableGroupsCell
          let allGroup = allGroups[indexPath.row]
 
-          cell.groupNameLabel.text = allGroup.nameGroup
-         cell.groupImage.image = allGroup.imageGroup
+        cell.configure(for: allGroup)
 
           return cell
      }

@@ -10,10 +10,10 @@ import UIKit
   class MyFriendsController: UITableViewController {
 
   // Дефолтный массив:
-     var friends = [User(nameSurnameFriend: "Иван Иванов", imageFriend: #imageLiteral(resourceName: "1")),
-                    User(nameSurnameFriend: "Сергей Сергиев", imageFriend: #imageLiteral(resourceName: "2")),
-                    User(nameSurnameFriend: "Дмитрий Дмитров", imageFriend: #imageLiteral(resourceName: "3")),
-                    User(nameSurnameFriend: "Алексей Алексеев", imageFriend: #imageLiteral(resourceName: "4"))]
+     var friends = [User(nameSurnameFriend: "Иван Иванов", imageFriend: "Иван Иванов"),
+                    User(nameSurnameFriend: "Сергей Сергиев", imageFriend: "Сергей Сергиев"),
+                    User(nameSurnameFriend: "Дмитрий Дмитров", imageFriend: "Дмитрий Дмитров"),
+                    User(nameSurnameFriend: "Алексей Алексеев", imageFriend: "Алексей Алексеев")]
 
       override func viewDidLoad() {
          super.viewDidLoad()
@@ -37,8 +37,8 @@ import UIKit
          let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
 
           let friend = friends[indexPath.row]
-         cell.nameSurnameLabel.text = friend.nameSurnameFriend
-         cell.friendImage.image = friend.imageFriend
+  
+        cell.configure(for: friend)
 
           return cell
      }

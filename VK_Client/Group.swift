@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Foundation
 
   struct Group {
      var nameGroup: String
-     var imageGroup: UIImage
+    var imageGroup: String
  }

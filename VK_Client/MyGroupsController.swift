@@ -33,8 +33,7 @@ import UIKit
           let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsCell
          let myGroup = myGroups[indexPath.row]
 
-          cell.myGroupNameLabel.text = myGroup.nameGroup
-         cell.myGroupImage.image = myGroup.imageGroup
+        cell.configure(for: myGroup)
 
           return cell
      }
@@ -66,6 +65,15 @@ import UIKit
                  if !myGroups.contains(where: {$0.nameGroup == group.nameGroup}) {
                      myGroups.append(group)
                      tableView.reloadData()
+                 } else {
+
+ // Alert: - Группа уже существует:
+                     let alert = UIAlertController(title: "Choose another group",
+                                                   message: "This group already exists on your list",
+                                                   preferredStyle: .alert)
+                     let alertAction = UIAlertAction(title: "OK", style: .cancel)
+                     alert.addAction(alertAction)
+                     present(alert, animated: true)
                  }
              }
          }

@@ -7,7 +7,18 @@
 
 import UIKit
 
-  class AvailableGroupsCell: UITableViewCell {
-     @IBOutlet weak var groupNameLabel: UILabel!
-     @IBOutlet weak var groupImage: UIImageView!
- }
+class AvailableGroupsCell: UITableViewCell {
+
+    @IBOutlet weak var groupNameLabel: UILabel!
+    @IBOutlet weak var groupImage: UIImageView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+    }
+
+    func configure(for model: Group) {
+        groupNameLabel.text = model.nameGroup
+        groupImage.image = UIImage(named: model.imageGroup)
+    }
+}

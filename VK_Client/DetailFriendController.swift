@@ -32,8 +32,9 @@ import UIKit
   // Кастим до DetailFriendCell:
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailFriendCell", for: indexPath) as! DetailFriendCell
 
-          let friendImage = friendsImage[indexPath.row].imageFriend
-         cell.detailFriendImage.image = friendImage
+        let friendImage = friendsImage[indexPath.row]
+
+             cell.configure(for: friendImage)
 
           return cell
      }

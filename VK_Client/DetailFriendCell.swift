@@ -7,6 +7,16 @@
 
 import UIKit
 
-  class DetailFriendCell: UICollectionViewCell {
-     @IBOutlet weak var detailFriendImage: UIImageView!
- }
+class DetailFriendCell: UICollectionViewCell {
+
+    @IBOutlet weak var detailFriendImage: UIImageView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+    }
+
+    func configure(for model: User) {
+        detailFriendImage.image = UIImage(named: model.imageFriend)
+    }
+}

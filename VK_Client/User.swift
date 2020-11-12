@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Foundation
 
   struct User {
      var nameSurnameFriend: String
-     var imageFriend: UIImage
+     var imageFriend: String
  }
