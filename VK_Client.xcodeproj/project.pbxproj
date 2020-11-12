@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A3CC6CC2255DA00200293293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC1255DA00200293293 /* AppDelegate.swift */; };
 		A3CC6CC4255DA00200293293 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC3255DA00200293293 /* SceneDelegate.swift */; };
-		A3CC6CC6255DA00200293293 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC5255DA00200293293 /* ViewController.swift */; };
+		A3CC6CC6255DA00200293293 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC5255DA00200293293 /* LoginViewController.swift */; };
 		A3CC6CC9255DA00200293293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3CC6CC7255DA00200293293 /* Main.storyboard */; };
 		A3CC6CCC255DA00200293293 /* VK_Client.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CCA255DA00200293293 /* VK_Client.xcdatamodeld */; };
 		A3CC6CCE255DA00200293293 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3CC6CCD255DA00200293293 /* Assets.xcassets */; };
@@ -20,7 +20,7 @@
 		A3CC6CBE255DA00200293293 /* VK_Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_Client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CC6CC1255DA00200293293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3CC6CC3255DA00200293293 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A3CC6CC5255DA00200293293 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A3CC6CC5255DA00200293293 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A3CC6CC8255DA00200293293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3CC6CCB255DA00200293293 /* VK_Client.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VK_Client.xcdatamodel; sourceTree = "<group>"; };
 		A3CC6CCD255DA00200293293 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 			children = (
 				A3CC6CC1255DA00200293293 /* AppDelegate.swift */,
 				A3CC6CC3255DA00200293293 /* SceneDelegate.swift */,
-				A3CC6CC5255DA00200293293 /* ViewController.swift */,
+				A3CC6CC5255DA00200293293 /* LoginViewController.swift */,
 				A3CC6CC7255DA00200293293 /* Main.storyboard */,
 				A3CC6CCD255DA00200293293 /* Assets.xcassets */,
 				A3CC6CCF255DA00200293293 /* LaunchScreen.storyboard */,
@@ -140,7 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3CC6CC6255DA00200293293 /* ViewController.swift in Sources */,
+				A3CC6CC6255DA00200293293 /* LoginViewController.swift in Sources */,
 				A3CC6CCC255DA00200293293 /* VK_Client.xcdatamodeld in Sources */,
 				A3CC6CC2255DA00200293293 /* AppDelegate.swift in Sources */,
 				A3CC6CC4255DA00200293293 /* SceneDelegate.swift in Sources */,
