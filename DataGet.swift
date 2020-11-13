@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
   class DataGet: AsyncOperation {
 
       private var urlConstructor = URLComponents()
