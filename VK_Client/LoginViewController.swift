@@ -1,12 +1,7 @@
-//
-//  ViewController.swift
-//  VK_Client
-//
-//  Created by Rayen on 11/12/20.
-//
-
 import UIKit
+
 class LoginViewController: UIViewController {
+
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
@@ -16,10 +11,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Кнопка изначально не активная.
         signInButton.isEnabled = false
         
-        // Наблюдатель за изменением введенных значений в Text Field.
         loginTextField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         
@@ -57,12 +50,12 @@ class LoginViewController: UIViewController {
         return checkResult
     }
     
-  func isUserDataValid() -> Bool {
+    func isUserDataValid() -> Bool {
         
         let login = loginTextField.text
         let password = passwordTextField.text
         
-        if login == "Rayen" && password == "root" {
+        if login == "Rayen" && password == "Root" {
             return true
         } else {
             return false
@@ -72,9 +65,9 @@ class LoginViewController: UIViewController {
     func showLoginError() {
         let alert = UIAlertController(title: "Error",
                                       message: """
-                                                   Your Login: Rayen
-                                                   Your Password: root
-                                                   """,
+                                               Your Login: Rayen
+                                               Your Password: root
+                                               """,
                                       preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Ok",
@@ -83,7 +76,11 @@ class LoginViewController: UIViewController {
         alert.addAction(action)
         present(alert, animated: true)
     }
-    
+        
     @IBAction func pressedSignInButton(_ sender: UIButton) {
+    }
+    
+// Метод возврата на экран авторизации:
+    @IBAction func myUnwindAction(segue: UIStoryboardSegue) {
     }
 }

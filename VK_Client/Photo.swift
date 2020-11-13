@@ -1,24 +1,24 @@
 //
-//  Group.swift
+//  Photo.swift
 //  VK_Client
 //
-//  Created by Rayen on 11/12/20.
+//  Created by Rayen on 11/13/20.
 //
 
 import Foundation
 import RealmSwift
 
-class Group: Object, Decodable {
+class Photo: Object, Decodable {
     
     @objc dynamic var id = 0
-    @objc dynamic var name: String? = nil
-    @objc dynamic var photo50: String? = nil
+    @objc dynamic var ownerId = 0
+    var sizes = List<Sizes>()
     
     override static func primaryKey() -> String? {
         return "id"
     }
     
     override static func indexedProperties() -> [String] {
-        return ["name"]
+        return ["ownerId"]
     }
 }

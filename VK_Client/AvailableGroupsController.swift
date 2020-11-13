@@ -2,43 +2,90 @@
 //  AvailableGroupsController.swift
 //  VK_Client
 //
-//  Created by Rayen on 11/12/20.
+//  Created by Rayen on 11/13/20.
 //
 
 import UIKit
 
-  class AvailableGroupsController: UITableViewController {
-
-  // Дефолтный массив:
-    var allGroups = [Group(nameGroup: "New Rap News", imageGroup: "New Rap News"),
-                         Group(nameGroup: "Лентач", imageGroup: "Лентач"),
-                         Group(nameGroup: "Mac OS", imageGroup: "Mac OS"),
-                         Group(nameGroup: "New Rap", imageGroup: "New Rap"),
-                         Group(nameGroup: "Рифмы и Панчи", imageGroup: "Рифмы и Панчи"),
-                         Group(nameGroup: "Hardcore Fighting", imageGroup: "Hardcore Fighting")]
-
-      override func viewDidLoad() {
-         super.viewDidLoad()
-     }
-
-      // MARK: - Table view data source
-
-     override func numberOfSections(in tableView: UITableView) -> Int {
-         return 1
-     }
-
-      override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return allGroups.count
-     }
-
-      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-          let cell = tableView.dequeueReusableCell(withIdentifier: "AvailableGroupsCell", for: indexPath) as! AvailableGroupsCell
-         let allGroup = allGroups[indexPath.row]
-
-        cell.configure(for: allGroup)
-
-          return cell
-     }
-
-  }
+class AvailableGroupsController: UITableViewController {
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    let firebaseManager = FirebaseManager()
+    let networkManager = NetworkManager()
+    var allGroups = [Group]()
+    var searchBarIsEmpty: Bool {
+        
+        guard let text = searchController.searchBar.text else { return false }
+        
+        return text.isEmpty
+    }
+    var isFiltering: Bool {
+        
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupSearchController()
+    }
+    
+    // MARK: Help Function
+    
+    func fetchRequestSearchGroups(text: String?) {
+        
+        networkManager.fetchRequestSearchGroups(text: text) { [weak self] groups in
+            
+            DispatchQueue.main.async {
+                
+                if self!.isFiltering {
+                    
+                    self?.allGroups = groups
+                }
+                
+                self?.tableView.reloadData()
+            }
+            
+        }
+    }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if isFiltering {
+            return allGroups.count
+        }
+        
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AvailableGroupsCell", for: indexPath) as! AvailableGroupsCell
+        
+        let allGroup = allGroups[indexPath.row]
+        
+        if isFiltering {
+            
+            cell.configure(for: allGroup)
+        }
+        
+        return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            
+            guard let userID = Session.shared.userId else { return }
+            let group = allGroups[indexPath.row]
+            
+            firebaseManager.saveUserGroups(userID: userID, group: group)
+        }
+    }
+}

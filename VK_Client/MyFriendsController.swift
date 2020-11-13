@@ -1,97 +1,120 @@
+//
+//  MyFriendsController.swift
+//  VK_Client
+//
+//  Created by Rayen on 11/13/20.
+//
+
+import Foundation
 import UIKit
+import RealmSwift
 
 class MyFriendsController: UITableViewController {
     
-    var friends = [User(nameSurnameFriend: "Иван Иванов", imageFriend: "Иван Иванов"),
-                   User(nameSurnameFriend: "Сергей Сергиев", imageFriend: "Сергей Сергиев"),
-                   User(nameSurnameFriend: "Дмитрий Дмитров", imageFriend: "Дмитрий Дмитров"),
-                   User(nameSurnameFriend: "Александр Лукашенко", imageFriend: "Александр Лукашенко"),
-                   User(nameSurnameFriend: "Владимир Путин", imageFriend: "Владимир Путин"),
-                   User(nameSurnameFriend: "Евгений Иванов", imageFriend: "Евгений Иванов"),
-                   User(nameSurnameFriend: "Никита Рыбов", imageFriend: "Никита Рыбов"),
-                   User(nameSurnameFriend: "Олег Олегов", imageFriend: "Олег Олегов"),
-                   User(nameSurnameFriend: "Эдуард Эдуардов", imageFriend: "Эдуард Эдуардов"),
-                   User(nameSurnameFriend: "Юрий Гагарин", imageFriend: "Юрий Гагарин"),
-                   User(nameSurnameFriend: "Ян Янов", imageFriend: "Ян Янов"),
-                   User(nameSurnameFriend: "Алексей Алексеев", imageFriend: "Алексей Алексеев")]
-    var friendsSection = [String]()
-    var friendsDictionary = [String: [User]]()
+    let searchController = UISearchController(searchResultsController: nil)
+    let networkManager = NetworkManager()
+    var friends: Results<User>!
+    var filteredUsers = [User]()
+    var token: NotificationToken?
+    var searchBarIsEmpty: Bool {
+        
+        guard let text = searchController.searchBar.text else { return false }
+        
+        return text.isEmpty
+    }
+    var isFiltering: Bool {
+        
+        return searchController.isActive && !searchBarIsEmpty
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sortFriend()
+        fetchRequestFriends()
+        setupSearchController()
+        tableView.sectionIndexColor = .white
+        bindTableAndRealm()
     }
     
     // MARK: - Help Function
     
-// эта функция проходит через каждого пользователя и устанавливает первую букву в качестве ключа. Затем он заполняет список пользователей с тем же ключом
-// таким образом мы получим словарь пользователей в соответствующем алфавитном порядке
-    private func sortFriend() {
+    private func fetchRequestFriends() {
         
-        for friend in friends {
+        do {
+            let realm = try Realm()
             
-            let key = "\(friend.nameSurnameFriend[friend.nameSurnameFriend.startIndex])"
+            let friend = realm.objects(User.self)
             
-            if var friendValue = friendsDictionary[key] {
-                friendValue.append(friend)
-                friendsDictionary[key] = friendValue
-            } else {
-                friendsDictionary[key] = [friend]
+            friends = friend
+        } catch {
+            
+            print(error)
+        }
+    }
+    
+    private func bindTableAndRealm() {
+        
+        guard let realm = try? Realm() else { return }
+        
+        friends = realm.objects(User.self)
+        
+        token = friends.observe { [weak self] (changes: RealmCollectionChange) in
+            
+            guard let tableView = self?.tableView else { return }
+            
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+                
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0,
+                                                                    section: 0) }),
+                                     with: .automatic)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0,
+                                                                   section: 0)}),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0,
+                                                                       section: 0) }),
+                                     with: .automatic)
+                tableView.endUpdates()
+                
+            case .error(let error):
+                fatalError("\(error)")
             }
-            
-            friendsSection = [String](friendsDictionary.keys).sorted()
         }
     }
 
     // MARK: - Table view data source
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return friendsSection.count
+        return 1
     }
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        let friendKey = friendsSection[section]
-        
-        if let friend = friendsDictionary[friendKey] {
-            return friend.count
+
+        if isFiltering {
+            return filteredUsers.count
         }
-        return 0
+
+        return friends.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
+        let myFriend: User
         
-        let friendKey = friendsSection[indexPath.section]
-        
-        if let friendValue = friendsDictionary[friendKey.uppercased()] {
-            
-            cell.configure(for: friendValue[indexPath.row])
+        if isFiltering {
+            myFriend = filteredUsers[indexPath.row]
+        } else {
+            myFriend = friends[indexPath.row]
         }
         
+        cell.configure(for: myFriend)
+        
         return cell
-    }
-    
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return friendsSection
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return friendsSection[section].uppercased()
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .light)
-        header.textLabel?.textAlignment = .left
-        header.textLabel?.textColor = .systemBlue
     }
     
     // MARK: - Navigation
@@ -103,14 +126,27 @@ class MyFriendsController: UITableViewController {
             let detailFriendController = segue.destination as? DetailFriendController
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 
-                let friendKey = friendsSection[indexPath.section]
-                
-                if let friendValue = friendsDictionary[friendKey.uppercased()] {
+                if isFiltering {
+
+                    let friends = filteredUsers[indexPath.row]
                     
-                    let image = friendValue[indexPath.row]
+                    guard let name = friends.firstName,
+                          let lastName = friends.lastName else { return }
+                        
+                    detailFriendController?.fetchRequestPhotosUser(for: friends.id)
+                    detailFriendController?.titleItem = name + " " + lastName
+                    detailFriendController?.ownerID = friends.id
+                } else {
                     
-                    detailFriendController?.friendsImage.removeAll()
-                    detailFriendController?.friendsImage.append(image)
+                    let friend = friends[indexPath.row]
+                    
+                    guard let name = friend.firstName,
+                          let lastName = friend.lastName else { return }
+                    
+                    detailFriendController?.fetchRequestPhotosUser(for: friend.id)
+                    detailFriendController?.titleItem = name + " " + lastName
+                    detailFriendController?.ownerID = friend.id
+                    
                 }
             }
         }
