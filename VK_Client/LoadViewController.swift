@@ -11,6 +11,7 @@ import UIKit
 class LoadViewController: UIViewController {
     
     private let networkManager = NetworkManager()
+    private let realmManager = RealmManager()
 
     
     @IBOutlet weak var firstPointLoad: UILabel!
@@ -21,6 +22,16 @@ class LoadViewController: UIViewController {
         super.viewDidLoad()
         
         networkManager.fetchRequestFriends()
+            .get { [weak self] friends in
+
+                   DispatchQueue.main.async {
+
+                       self?.realmManager.updateFriends(for: friends)
+                  }
+              }
+              .catch { error in
+                  print(error)
+              }
         networkManager.fetchRequestGroupsUser()
         networkManager.fetchRequestPhotosUser(for: 0) {}
     }
