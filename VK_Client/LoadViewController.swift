@@ -10,7 +10,8 @@ import UIKit
 class LoadViewController: UIViewController {
     
     private let networkManager = NetworkManager()
-
+    private let realmManager = RealmManager()
+    
     @IBOutlet weak var firstPointLoad: UILabel!
     @IBOutlet weak var secondPointLoad: UILabel!
     @IBOutlet weak var thirdPointLoad: UILabel!
@@ -19,6 +20,16 @@ class LoadViewController: UIViewController {
         super.viewDidLoad()
         
         networkManager.fetchRequestFriends()
+            .get { [weak self] friends in
+                
+                DispatchQueue.main.async {
+                    
+                    self?.realmManager.updateFriends(for: friends)
+                }
+            }
+            .catch { error in
+                print(error)
+            }
         networkManager.fetchRequestGroupsUser()
         networkManager.fetchRequestPhotosUser(for: 0) {}
     }
@@ -43,7 +54,7 @@ class LoadViewController: UIViewController {
                        animations: {
                         self.firstPointLoad.transform = .identity
                         self.firstPointLoad.alpha = 0.2
-        },
+                       },
                        completion: nil)
         
         UIView.animate(withDuration: 0.5,
@@ -52,7 +63,7 @@ class LoadViewController: UIViewController {
                        animations: {
                         self.secondPointLoad.transform = .identity
                         self.secondPointLoad.alpha = 0.2
-        },
+                       },
                        completion: nil)
         
         UIView.animate(withDuration: 0.5,
@@ -62,7 +73,7 @@ class LoadViewController: UIViewController {
                         
                         self.thirdPointLoad.transform = .identity
                         self.thirdPointLoad.alpha = 0.2
-        },
+                       },
                        completion: nil)
     }
     
@@ -126,7 +137,7 @@ class LoadViewController: UIViewController {
     
     func goToTapBarController() {
         
-// Откладываем на 3 секунды:
+        // Откладываем на 3 секунды:
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             
             let TapBarController = self.storyboard!.instantiateViewController(withIdentifier: "TapBar") as UIViewController

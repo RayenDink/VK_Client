@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 class NetworkManager {
     
@@ -13,7 +14,7 @@ class NetworkManager {
     private let constants = NetworkConstants()
     private let configuration: URLSessionConfiguration!
     private let session: URLSession!
-    private let realmManager = RealmManager()
+    private var realmManager = RealmManager()
     
     init() {
         
@@ -47,7 +48,7 @@ class NetworkManager {
     
     // MARK: Friends
     
-    func fetchRequestFriends() {
+    func fetchRequestFriends() -> Promise<[User]> {
         
         urlComponents.path = "/method/friends.get"
         
@@ -58,25 +59,28 @@ class NetworkManager {
             URLQueryItem(name: "v", value: constants.versionAPI)
         ]
         
-        session.dataTask(with: urlComponents.url!) { [weak self] (data, response, error) in
-            
-            guard let data = data else { return }
-            
-            do {
-                
-                let decoder = JSONDecoder()
-                
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                guard let friends = try decoder.decode(Response<User>.self, from: data).response?.items else { return }
-                
-                DispatchQueue.main.async {
-                    
-                    self?.realmManager.updateFriends(for: friends)
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }.resume()
+        let promise = Promise<[User]> { [weak self] resolver in
+            session.dataTask(with: urlComponents.url!) { (data, response, error) in
+                guard let data = data else {
+                    resolver.reject(error!)
+                    return
+                                    }
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                           guard let friends = try decoder.decode(Response<User>.self, from: data).response?.items else {
+                               resolver.reject(error!)
+                               return
+                           }
+
+                            resolver.fulfill(friends)
+
+                        } catch {
+                           resolver.reject(error)
+                        }
+            }.resume()
+        }
+        return promise
     }
     // MARK: Photos User
     

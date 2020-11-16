@@ -48,6 +48,15 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - PromiseKit (6.13.1):
+     - PromiseKit/CorePromise (= 6.13.1)
+     - PromiseKit/Foundation (= 6.13.1)
+     - PromiseKit/UIKit (= 6.13.1)
+   - PromiseKit/CorePromise (6.13.1)
+   - PromiseKit/Foundation (6.13.1):
+     - PromiseKit/CorePromise
+   - PromiseKit/UIKit (6.13.1):
+     - PromiseKit/CorePromise
   - PromisesObjC (1.2.10)
   - Realm (5.3.2):
     - Realm/Headers (= 5.3.2)
@@ -59,6 +68,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - RealmSwift
+   - PromiseKit (~> 6.8)
 
 SPEC REPOS:
   trunk:
@@ -72,6 +82,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+     - PromiseKit
     - PromisesObjC
     - Realm
     - RealmSwift
