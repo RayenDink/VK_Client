@@ -10,6 +10,7 @@ import RealmSwift
 
 class DetailFriendController: UICollectionViewController {
     
+    private var picService: PicService!
     let networkManager = NetworkManager()
     var friendsImage: Photo?
     var titleItem: String?
@@ -17,7 +18,7 @@ class DetailFriendController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        picService = PicService(container: collectionView)
         setupNavigationBar()
     }
     
@@ -88,8 +89,9 @@ class DetailFriendController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailFriendCell", for: indexPath) as! DetailFriendCell
         
         guard let friendImage = friendsImage?.sizes.last else { return cell }
-        
-        cell.configure(for: friendImage)
+        guard let image = friendImage.src,
+              let detailFriendImage = photoService.photo(at: indexPath, by: image) else { return cell }
+        cell.configure(for: friendImage, detailFriendImage: detailFriendImage)
         
         return cell
     }

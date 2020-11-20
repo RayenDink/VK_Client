@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 class MyGroupsController: UITableViewController {
-    
+    private var picService: PicService!
     let searchController = UISearchController(searchResultsController: nil)
     let realmManager = RealmManager()
     var myGroups: Results<Group>!
@@ -28,7 +28,7 @@ class MyGroupsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        picService = PicService(container: tableView)
         bindTableAndRealm()
         setupSearchController()
         fetchRequestGroupsUser()
@@ -116,7 +116,10 @@ class MyGroupsController: UITableViewController {
             myGroup = myGroups[indexPath.row]
         }
         
-        cell.configure(for: myGroup)
+        guard let image = myGroup.photo50,
+                     let groupImage = picService.photo(at: indexPath, by: image) else { return cell }
+
+               cell.configure(for: myGroup, myGroupImage: groupImage)
         
         return cell
     }

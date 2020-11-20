@@ -55,6 +55,7 @@
 		A3442F43255E1F8F0043FC13 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3442F42255E1F8F0043FC13 /* NewsViewController.swift */; };
 		A3442F46255E1FA70043FC13 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3442F45255E1FA70043FC13 /* NewsCell.swift */; };
 		A3442F49255E1FBB0043FC13 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3442F48255E1FBB0043FC13 /* SceneDelegate.swift */; };
+		A35EC4C32567A20600570621 /* PicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35EC4C22567A20600570621 /* PicService.swift */; };
 		A3CC6CC6255DA00200293293 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC5255DA00200293293 /* LoginViewController.swift */; };
 		A3CC6CC9255DA00200293293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3CC6CC7255DA00200293293 /* Main.storyboard */; };
 		A3CC6CCC255DA00200293293 /* VK_Client.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CCA255DA00200293293 /* VK_Client.xcdatamodeld */; };
@@ -109,6 +110,7 @@
 		A3442F42255E1F8F0043FC13 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		A3442F45255E1FA70043FC13 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		A3442F48255E1FBB0043FC13 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A35EC4C22567A20600570621 /* PicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicService.swift; sourceTree = "<group>"; };
 		A3CC6CBE255DA00200293293 /* VK_Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_Client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CC6CC5255DA00200293293 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A3CC6CC8255DA00200293293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				A3442EF7255E1CD70043FC13 /* FirebaseManager.swift */,
 				A3442EFA255E1CEB0043FC13 /* NetworkConstants.swift */,
 				A3442EFD255E1D040043FC13 /* NetworkManager.swift */,
+				A35EC4C22567A20600570621 /* PicService.swift */,
 				A3442F01255E1D280043FC13 /* RealmManager.swift */,
 				A3442F04255E1D430043FC13 /* DateFormatterVK.swift */,
 				A3442F07255E1D5E0043FC13 /* LikeControl.swift */,
@@ -310,6 +313,7 @@
 				A3442F0F255E1DB70043FC13 /* PushAnimator.swift in Sources */,
 				A3442F2B255E1ED00043FC13 /* ImagesFriendController.swift in Sources */,
 				A3442F1E255E1E470043FC13 /* MyFriendsController.swift in Sources */,
+				A35EC4C32567A20600570621 /* PicService.swift in Sources */,
 				A3442EE1255E1BD60043FC13 /* Photo.swift in Sources */,
 				A3442F28255E1EB70043FC13 /* DetailFriendCell.swift in Sources */,
 				A3442F12255E1DD50043FC13 /* CustomNavigationController.swift in Sources */,
