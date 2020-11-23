@@ -11,6 +11,8 @@ class NewsViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     private let networkManager = NetworkManager()
+    private var nextFrom = ""
+        private var isLoading = false
     
     var news = [NewsModel]()
 
@@ -18,6 +20,8 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.prefetchDataSource = self
         
         fetchRequestNews()
         setupRefreshControl()
@@ -30,18 +34,19 @@ class NewsViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    func fetchRequestNews() {
+    func fetchRequestNews(nextFrom: String = "" ,callback: (([NewsModel], String?) -> ())? = nil) {
         
-        networkManager.fetchRequestNews { news in
+        networkManager.fetchRequestNews { news (startFrom: nextFrom) { [weak self] (news, nextFrom) in
             
-            self.news = news
-            
-            OperationQueue.main.addOperation { [weak self] in
+            self?.nextFrom = nextFrom
+            self?.news = news
+            callback?(news,nextFrom)
+            OperationQueue.main.addOperation {
                 self?.tableView.reloadData()
             }
         }
         
-        refreshControl.endRefreshing()
+       
     }
 }
 
@@ -49,11 +54,18 @@ extension NewsViewController {
     
     @objc private func reload() {
         
-        fetchRequestNews()
+        fetchRequestNews { [weak self] (news,_) in
+                 guard let self = self else { return }
+
+                  self.refreshControl.endRefreshing()
+
+                  guard news.count > 0 else { return }
+                 self.news = news + self.news
+             }
     }
 }
 
-extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
+    extension NewsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news.count
@@ -72,5 +84,28 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+    extension NewsViewController: UITableViewDataSourcePrefetching {
+
+          func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+
+              guard let maxRow = indexPaths
+                     .map({ $0.row })
+                     .max()
+             else { return }
+
+              if maxRow > news.count - 3,
+                !isLoading {
+                 isLoading = true
+
+                  fetchRequestNews(nextFrom: nextFrom) { [weak self] (news,_) in
+                     guard let self = self else { return }
+
+                      self.news.append(contentsOf: news)
+                     self.isLoading = false
+                 }
+             }
+         }
     }
 }

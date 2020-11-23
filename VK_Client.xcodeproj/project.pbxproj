@@ -55,7 +55,7 @@
 		A3442F43255E1F8F0043FC13 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3442F42255E1F8F0043FC13 /* NewsViewController.swift */; };
 		A3442F46255E1FA70043FC13 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3442F45255E1FA70043FC13 /* NewsCell.swift */; };
 		A3442F49255E1FBB0043FC13 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3442F48255E1FBB0043FC13 /* SceneDelegate.swift */; };
-		A35EC4C32567A20600570621 /* PicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35EC4C22567A20600570621 /* PicService.swift */; };
+		A3A90421256BDB6E000E0F38 /* PicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A90420256BDB6E000E0F38 /* PicService.swift */; };
 		A3CC6CC6255DA00200293293 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CC5255DA00200293293 /* LoginViewController.swift */; };
 		A3CC6CC9255DA00200293293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3CC6CC7255DA00200293293 /* Main.storyboard */; };
 		A3CC6CCC255DA00200293293 /* VK_Client.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CC6CCA255DA00200293293 /* VK_Client.xcdatamodeld */; };
@@ -110,7 +110,7 @@
 		A3442F42255E1F8F0043FC13 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		A3442F45255E1FA70043FC13 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		A3442F48255E1FBB0043FC13 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A35EC4C22567A20600570621 /* PicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicService.swift; sourceTree = "<group>"; };
+		A3A90420256BDB6E000E0F38 /* PicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicService.swift; sourceTree = "<group>"; };
 		A3CC6CBE255DA00200293293 /* VK_Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_Client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CC6CC5255DA00200293293 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A3CC6CC8255DA00200293293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -136,13 +136,6 @@
 		A3CC6CB5255DA00200293293 = {
 			isa = PBXGroup;
 			children = (
-				A32F99A6255EE0950057B1DC /* Async.swift */,
-				A32F99AA255EE1270057B1DC /* SavingDataOperation.swift */,
-				A32F99AD255EE1590057B1DC /* ParseDataOperation.swift */,
-				A32F99B0255EE17E0057B1DC /* DataGet.swift */,
-				A32604DB255E2DCC00D32ADF /* VK Client.xcworkspace */,
-				A32604D8255E2DC000D32ADF /* Podfile.lock */,
-				A32604CF255E288900D32ADF /* Podfile */,
 				A3CC6CC0255DA00200293293 /* VK_Client */,
 				A3CC6CBF255DA00200293293 /* Products */,
 			);
@@ -160,11 +153,19 @@
 			isa = PBXGroup;
 			children = (
 				A3242430255DD26200AC2018 /* Group.swift */,
+				A3A90420256BDB6E000E0F38 /* PicService.swift */,
 				A3442EE0255E1BD60043FC13 /* Photo.swift */,
 				A3242433255DD27D00AC2018 /* User.swift */,
 				A3442EE3255E1C010043FC13 /* Sizes.swift */,
 				A3442EE7255E1C1B0043FC13 /* Items.swift */,
 				A3442EEA255E1C2E0043FC13 /* Response.swift */,
+				A32F99A6255EE0950057B1DC /* Async.swift */,
+				A32F99AA255EE1270057B1DC /* SavingDataOperation.swift */,
+				A32F99AD255EE1590057B1DC /* ParseDataOperation.swift */,
+				A32F99B0255EE17E0057B1DC /* DataGet.swift */,
+				A32604DB255E2DCC00D32ADF /* VK Client.xcworkspace */,
+				A32604D8255E2DC000D32ADF /* Podfile.lock */,
+				A32604CF255E288900D32ADF /* Podfile */,
 				A3442EED255E1C4F0043FC13 /* News.swift */,
 				A3CC6CC7255DA00200293293 /* Main.storyboard */,
 				A3CC6CCF255DA00200293293 /* LaunchScreen.storyboard */,
@@ -173,7 +174,6 @@
 				A3442EF7255E1CD70043FC13 /* FirebaseManager.swift */,
 				A3442EFA255E1CEB0043FC13 /* NetworkConstants.swift */,
 				A3442EFD255E1D040043FC13 /* NetworkManager.swift */,
-				A35EC4C22567A20600570621 /* PicService.swift */,
 				A3442F01255E1D280043FC13 /* RealmManager.swift */,
 				A3442F04255E1D430043FC13 /* DateFormatterVK.swift */,
 				A3442F07255E1D5E0043FC13 /* LikeControl.swift */,
@@ -313,7 +313,7 @@
 				A3442F0F255E1DB70043FC13 /* PushAnimator.swift in Sources */,
 				A3442F2B255E1ED00043FC13 /* ImagesFriendController.swift in Sources */,
 				A3442F1E255E1E470043FC13 /* MyFriendsController.swift in Sources */,
-				A35EC4C32567A20600570621 /* PicService.swift in Sources */,
+				A3A90421256BDB6E000E0F38 /* PicService.swift in Sources */,
 				A3442EE1255E1BD60043FC13 /* Photo.swift in Sources */,
 				A3442F28255E1EB70043FC13 /* DetailFriendCell.swift in Sources */,
 				A3442F12255E1DD50043FC13 /* CustomNavigationController.swift in Sources */,
