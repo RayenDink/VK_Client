@@ -11,6 +11,7 @@ import RealmSwift
 
 class MyFriendsController: UITableViewController {
     
+    private var picService: PicService!
     let searchController = UISearchController(searchResultsController: nil)
     let networkManager = NetworkManager()
     var friends: Results<User>!
@@ -29,7 +30,8 @@ class MyFriendsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.sectionIndexColor = .white
+                picService = PicService(container: tableView)
         fetchRequestFriends()
         setupSearchController()
         tableView.sectionIndexColor = .white
